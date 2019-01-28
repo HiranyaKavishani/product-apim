@@ -58,6 +58,9 @@ public class APIRequest extends AbstractRequest {
     private String resourceMethodAuthType;
     private String resourceMethodThrottlingTier;
     private String uriTemplate;
+    private String accessControl;
+    private String visibilityType;
+    private String accessControlRoles;
 
     private String import_definition;
     private String swagger_filename;
@@ -91,18 +94,23 @@ public class APIRequest extends AbstractRequest {
         constructSwagger();
     }
 
-    public APIRequest(String name, String context, String visibility, String roles, String version, String resource,
+    public APIRequest(String name, String context, String visibility, String roles,String visibilityType, String version, String resource,
                       String tiersCollection, URL endpointUrl) {
 
         this.name = name;
         this.context = context;
         this.version = version;
         this.resource = resource;
-        this.visibility = visibility;
         this.tiersCollection = tiersCollection;
 
-        if (this.visibility == "restricted") {
+        if (visibility == "restricted" && visibilityType == "store") {
             this.roles = roles;
+            this.visibility = visibility;
+        }
+
+        if (visibility == "restricted" && visibilityType == "publisher") {
+            this.accessControl = visibility;
+            this.accessControlRoles = roles;
         }
 
         try {
@@ -115,6 +123,7 @@ public class APIRequest extends AbstractRequest {
         }
         constructSwagger();
     }
+
 
     public APIRequest(String name, String context, String visibility, String version, String resource,
                       String description, String tag, String tiersCollection, String backend, String bizOwner,
@@ -218,6 +227,12 @@ public class APIRequest extends AbstractRequest {
         }
         if (this.roles != null) {
             this.addParameter("roles", this.roles);
+        }
+        if (this.accessControl != null) {
+            this.addParameter("accessControl", this.accessControl);
+        }
+        if (this.accessControlRoles != null) {
+            this.addParameter("accessControlRoles", this.accessControlRoles);
         }
         if (this.tag != null) {
             this.addParameter("tags", this.tag);
