@@ -163,8 +163,10 @@ public class ScenarioDataProvider {
     @DataProvider(name = "UserTypeDataProvider")
     public static Object[][] userTypeDataProvider() {
         return new Object[][]{
-                { "normalUser"},
-                { "tenantUser" }
+                { "normalUser" , "admin"},
+                { "normalUser" , "role"},
+                { "tenantUser" , "admin"},
+                { "tenantUser" , "role"}
         };
     }
 }

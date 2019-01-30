@@ -53,6 +53,7 @@ public class RESTApiVisibilityRestrictedByRolesNegativeTestCase extends Scenario
     private final String CREATOR = "Creator";
     private final String SUBSCRIBER = "Subscriber";
     private final String HEALTH_API_PUBLISHER = "Health-Publisher";
+    private final String VISIBILITY_TYPE = "store";
     private APIStoreRestClient apiStoreClient;
 
     @BeforeClass(alwaysRun = true)
@@ -77,8 +78,8 @@ public class RESTApiVisibilityRestrictedByRolesNegativeTestCase extends Scenario
         apiName = "PhoneVerificationOptionalAdd";
         apiContext = "/phoneverify";
 
-        APIRequest apiRequest = new APIRequest(apiName, apiContext, apiVisibility, SUBSCRIBER, apiVersion, apiResource,
-                tierCollection, new URL(backendEndPoint));
+        APIRequest apiRequest = new APIRequest(apiName, apiContext, apiVisibility, SUBSCRIBER, VISIBILITY_TYPE,
+                apiVersion, apiResource, tierCollection, new URL(backendEndPoint));
 
         HttpResponse apiCreationResponse = apiPublisher.addAPI(apiRequest);
         verifyResponse(apiCreationResponse);
