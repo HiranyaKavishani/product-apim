@@ -61,20 +61,20 @@ public class PublisherAccessControlTestCase extends ScenarioTestBase {
     private static final String TENANTUSER = "tenantUser";
     private static final String NORMALUSER = "normalUser";
 
-
     Map<String, String> apiNames = new HashMap<>();
     Map<String, String> userList = new HashMap<>();
-    Map<String, String>roleList = new HashMap<>();
+    Map<String, String> roleList = new HashMap<>();
     private int count = 0;
 
     @BeforeClass(alwaysRun = true)
     public void init() {
+
         apiPublisher = new APIPublisherRestClient(publisherURL);
     }
 
     @Test(description = "2.2.1.1", dataProvider = "UserTypeDataProvider",
-    dataProviderClass = ScenarioDataProvider.class)
-    public void testVisibilityOfAPIsInPublisherRestrictedByRoles(String userType,String role) throws Exception {
+            dataProviderClass = ScenarioDataProvider.class)
+    public void testVisibilityOfAPIsInPublisherRestrictedByRoles(String userType, String role) throws Exception {
 
         apiName = "API__" + count;
         apiContext = "/check" + count;
@@ -139,9 +139,9 @@ public class PublisherAccessControlTestCase extends ScenarioTestBase {
         createRole(ADMIN_LOGIN_USERNAME, ADMIN_PASSWORD, publisherRole, permissionArray);
         createRole(ADMIN_LOGIN_USERNAME, ADMIN_PASSWORD, creatorRole, permissionArray);
 
-        createUser(creator, password, new String[]{ "Internal/creator",publisherRole,creatorRole }, ADMIN_LOGIN_USERNAME,
+        createUser(creator, password, new String[]{"Internal/creator", publisherRole, creatorRole}, ADMIN_LOGIN_USERNAME,
                 ADMIN_PASSWORD);
-        createUser(testUser, password, new String[]{ publisherRole },ADMIN_LOGIN_USERNAME, ADMIN_PASSWORD);
+        createUser(testUser, password, new String[]{publisherRole}, ADMIN_LOGIN_USERNAME, ADMIN_PASSWORD);
 
         APIRequest apiRequest = new APIRequest(apiName, apiContext, apiVisibility, roleSet, visibilityType,
                 apiVersion, apiResource, tierCollection, new URL(backendEndPoint));
@@ -158,9 +158,8 @@ public class PublisherAccessControlTestCase extends ScenarioTestBase {
         userList.put(creator, ADMIN_LOGIN_USERNAME);
     }
 
-
-    @Test(description = "2.2.1.3",dataProvider = "UserTypeDataProvider", dataProviderClass = ScenarioDataProvider.class)
-    public void testVisibilityOfAPIsPublisherRestrictedByMultipleRoles(String userType,String role) throws Exception {
+    @Test(description = "2.2.1.3", dataProvider = "UserTypeDataProvider", dataProviderClass = ScenarioDataProvider.class)
+    public void testVisibilityOfAPIsPublisherRestrictedByMultipleRoles(String userType, String role) throws Exception {
 
         publisherRole = "NewRole3" + count;
         creatorRole = "NewRole4" + count;
@@ -240,7 +239,6 @@ public class PublisherAccessControlTestCase extends ScenarioTestBase {
         userList.put(creator, adminUsername);
     }
 
-
     private void validateRoles(String roles) throws APIManagerIntegrationTestException {
 
         HttpResponse checkValidationRole = apiPublisher.validateRoles(roles);
@@ -254,7 +252,7 @@ public class PublisherAccessControlTestCase extends ScenarioTestBase {
         verifyResponse(apiCreationResponse);
     }
 
-    public void getAPI(String apiName,String provider) throws APIManagerIntegrationTestException {
+    public void getAPI(String apiName, String provider) throws APIManagerIntegrationTestException {
 
         HttpResponse apiResponseGetAPI = apiPublisher.getAPI(apiName, provider, apiVersion);
         verifyResponse(apiResponseGetAPI);
@@ -262,7 +260,7 @@ public class PublisherAccessControlTestCase extends ScenarioTestBase {
     }
 
     @AfterTest(alwaysRun = true)
-    public void destroy() throws  Exception{
+    public void destroy() throws Exception {
 
         for (Map.Entry<String, String> entry : apiNames.entrySet()) {
             String apiName = entry.getKey();
