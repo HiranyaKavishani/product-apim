@@ -5,7 +5,6 @@
  *Version 2.0 (the "License"); you may not use this file except
  *in compliance with the License.
  *You may obtain a copy of the License at
- *
  *http://www.apache.org/licenses/LICENSE-2.0
  *
  *Unless required by applicable law or agreed to in writing,
@@ -32,8 +31,11 @@ import org.wso2.am.integration.test.utils.bean.APILifeCycleState;
 import org.wso2.am.scenario.test.common.APIRequest;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import javax.ws.rs.core.Response;
-import java.util.*;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;

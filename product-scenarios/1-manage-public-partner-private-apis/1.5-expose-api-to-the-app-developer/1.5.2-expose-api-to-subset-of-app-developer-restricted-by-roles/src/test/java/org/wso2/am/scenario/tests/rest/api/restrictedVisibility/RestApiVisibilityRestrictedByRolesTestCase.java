@@ -113,7 +113,7 @@ public class RestApiVisibilityRestrictedByRolesTestCase extends ScenarioTestBase
 
         createRole(ADMIN_LOGIN_USERNAME, ADMIN_PASSWORD, subscribeRole, permissionArray);
         createRole(ADMIN_LOGIN_USERNAME, ADMIN_PASSWORD, creatorRole, permissionArray);
-        createUser(userName, password, new String[]{subscribeRole} , ADMIN_LOGIN_USERNAME, ADMIN_PASSWORD);
+        createUser(userName, password, new String[]{subscribeRole}, ADMIN_LOGIN_USERNAME, ADMIN_PASSWORD);
 
         String multipleRoles = subscribeRole + "," + creatorRole;
         APIRequest apiRequest = new APIRequest(apiName, apiContext, apiVisibility, multipleRoles, VISIBILITY_TYPE,
